@@ -1,5 +1,6 @@
 # import the pygame module, so you can use it
 import pygame
+import Sprite
 
 
 class AssetLoader:
@@ -10,6 +11,6 @@ class AssetLoader:
         #self.flight2_sound = pygame.mixer.Sound('assets/sfx/flight2.mp3')
         self.hit_sound = pygame.mixer.Sound('assets/sfx/hit.wav')
         #self.win_sound = pygame.mixer.Sound('assets/sfx/win.wav')
-        self.baton_sprite = pygame.image.load('assets/sprites/baton.png')
-        self.duck_sprite = pygame.image.load('assets/sprites/duck.jpg')
-        self.duck2_sprite = pygame.image.load('assets/sprites/duck2.png')
+        self.baton_sprite = Sprite.Sprite(pygame.image.load('assets/sprites/baton.png'))
+        self.duck_sprite = Sprite.Sprite(pygame.image.load('assets/sprites/duck.jpg'))
+        self.duck2_sprite = Sprite.Sprite(pygame.image.load('assets/sprites/duck2.png'))
