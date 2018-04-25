@@ -1,12 +1,20 @@
-# import the pygame module, so you can use it
-import pygame
 
-sound = pygame.mixer.Sound("assets/sfx/step1.wav")
+
+
+class GameScreen:
+    def __init__():
+        pygame.init()
+        self._step_sound = pygame.mixer.Sound('assets/sfx/step2.wav')
+        pygame.display.set_caption('minimal program')
+
+
 
 # define a main function
 def main():
     # initialize the pygame module
     pygame.init()
+    sound = pygame.mixer.Sound("assets/sfx/step2.wav")
+    sound.play()
     # load and set the logo
     #logo = pygame.image.load("logo32x32.png")
     #pygame.display.set_icon(logo)
@@ -27,7 +35,7 @@ def main():
                 # change the value to False, to exit the main loop
                 running = False
 
-def runSound() :
+#def runSound() :
 
 
 
