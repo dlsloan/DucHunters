@@ -1,8 +1,9 @@
-
+import pygame
+import AssetLoader
 
 
 class GameScreen:
-    def __init__():
+    def __init__(self):
         pygame.init()
         self._step_sound = pygame.mixer.Sound('assets/sfx/step2.wav')
         pygame.display.set_caption('minimal program')
@@ -11,6 +12,7 @@ class GameScreen:
 
 # define a main function
 def main():
+    assets = AssetLoader()
     # initialize the pygame module
     pygame.init()
     sound = pygame.mixer.Sound("assets/sfx/step2.wav")
