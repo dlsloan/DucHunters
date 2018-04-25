@@ -1,44 +1,84 @@
 import pygame
 import AssetLoader
 
+_XMAX = 800
+_YMAX = 600
 
-class GameScreen:
+_YSTEP = 50
+_XSTEP = 50
+
+class DuckHunter:
     def __init__(self):
         pygame.init()
-        self._step_sound = pygame.mixer.Sound('assets/sfx/step2.wav')
         pygame.display.set_caption('minimal program')
+        self.screen = pygame.display.set_mode((800, 600))
+        self.screen.fill((128, 0, 128))
+        logo = pygame.image.load("assets/ducklogo.png")
+        pygame.display.set_icon(logo)
 
+    def update_display(self):
+        pygame.display.flip()
+        self.screen.fill((128, 0, 128))
+
+
+def move_down(game, assets, x, y):
+    y = y + _YSTEP
+    if y >= _YMAX:
+        y = _YMAX - 1
+
+    assets.step1_sound.play()
+
+    return x,y
+
+
+def move_up(game, assets, x, y):
+    y = y - _YSTEP
+    if y <= 0:
+        y = 0
+
+    assets.step1_sound.play()
+    return x,y
+
+
+def move_right(game, assets, x, y):
+    x = x + _XSTEP
+    if x >= _XMAX:
+        x = _XMAX - 1
+
+    assets.step1_sound.play()
+    return x,y
+
+
+def move_left(game, assets, x, y):
+    x = x - _XSTEP
+    if x <= 0:
+        x = 0
+    assets.step1_sound.play()
+    return x,y
 
 
 # define a main function
 def main():
-    assets = AssetLoader()
-    # initialize the pygame module
-    pygame.init()
-    sound = pygame.mixer.Sound("assets/sfx/step2.wav")
-    sound.play()
-    # load and set the logo
-    #logo = pygame.image.load("logo32x32.png")
-    #pygame.display.set_icon(logo)
-    pygame.display.set_caption("minimal program")
-
-    # create a surface on screen that has the size of 240 x 180
-    screen = pygame.display.set_mode((800, 600))
-
-    # define a variable to control the main loop
+    game = DuckHunter()
+    assets = AssetLoader.AssetLoader()
     running = True
-
-    # main loop
+    duck_x = 0
+    duck_y = 0
     while running:
-        # event handling, gets all event from the eventqueue
         for event in pygame.event.get():
-            # only do something if the event is of type QUIT
             if event.type == pygame.QUIT:
-                # change the value to False, to exit the main loop
                 running = False
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_DOWN:
+                duck_x, duck_y = move_down(game, assets, duck_x, duck_y)
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
+                duck_x, duck_y = move_up(game, assets, duck_x, duck_y)
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
+                duck_x, duck_y = move_left(game, assets, duck_x, duck_y)
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
+                duck_x, duck_y = move_right(game, assets, duck_x, duck_y)
 
-#def runSound() :
-
+        game.screen.blit(assets.duck2_sprite, (duck_x, duck_y))
+        game.update_display()
 
 
 # run the main function only if this module is executed as the main script
